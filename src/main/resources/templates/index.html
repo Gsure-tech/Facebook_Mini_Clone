@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/style3.css">
+</head>
+<body>
+<nav>
+    <div class="nav-left">
+        <img src="images/facebook1.png" class="logo">
+        <ul>
+            <li><img src="images/notification.png"></li>
+            <li><img src="images/inbox.png"></li>
+            <li><img src="images/video.png"></li>
+        </ul>
+    </div>
+    <div class="nav-right">
+        <div class="search-box">
+            <img src="images/search.png">
+            <input type="text" placeholder="Search">
+        </div>
+        <div class="nav-user-icon online" >
+            <img src="images/profile-pic.png" class="logos" >
+
+        </div>
+        <div class="log">
+            <a href="/logout"><img src="images/logout2.png" class="logout"></a>
+            Hello <span th:text="${session.user.getFirstName}"   class="logoutt"></span>
+        </div>
+</nav>
+<form action="/sendPost" method="post">
+    <div class="post-input-container">
+
+        <h3>Create a post</h3>
+        <textarea rows="6" name="postName"> </textarea>
+        <input type="hidden" name="usersModel" th:value="${session.user.getId()}" >
+        <button class="btnPost" type="submit">Post</button>
+        <div class="post-row">
+</form>
+
+</div>
+</div>
+
+<div class="displayPost" th:each="postModelList : ${postModelLists}" style="margin: auto; margin-bottom:1rem; ">
+    <div class="posterName" style="background-color:dodgerblue; color: white"><span  th:text="${postModelList.getUsersModel().getFirstName()}"> </span> posted</div>
+    <span th:text="${postModelList.getPostName()}"> </span> <br>
+    <div class="activity-icons">
+        <div><img src="images/like-blue.png" class="iconLike"><span id="number">0</span> </div>
+        <div><img src="images/unlike.png" class="unLike" > <span id="unLikeNumber">0</span>  </div>
+      <!--  <div><img src="images/share.png" class="share"> <span id="shareNumber">0</span> </div>-->
+    </div>
+    <div class="displayComment" th:each="commentModeList:${commentModeList}" >
+        <div style="font-style: italic; font-size: 12px; color: #1877f2"><span th:text="${commentModeList.getUsersModel().getFirstName()}"></span> commented</div>
+        <span th:text="${commentModeList.getComment()}"> </span> <br>
+    </div>
+
+    <form action="/sendComment"  method="post">
+    <div class="post-comment">
+        <input type="text" name="comment" placeholder="write a comment">
+            <input type="hidden" name="usersModel" th:value="${session.user.getId()}" >
+        <button class="btnPostComment">comment</button>
+    </div>
+        </form>
+
+</div>
+
+<script>
+    like = document.getElementsByClassName('iconLike')[0];
+    unlike = document.getElementsByClassName('unLike')[0];
+    //share = document.getElementsByClassName('share')[0];
+
+    number = document.getElementById('number');
+    unLikeNumber = document.getElementById('unLikeNumber');
+   // shareNumber = document.getElementById('shareNumber');
+
+    like.addEventListener('click',function () {
+        number.innerText = parseInt(number.innerHTML)+1;
+    });
+    unlike.addEventListener('click',function () {
+        unLikeNumber.innerText = parseInt(unLikeNumber.innerHTML)+1;
+    });
+    /*share.addEventListener('click',function () {
+        shareNumber.innerText = parseInt(shareNumber.innerHTML)+1;
+    });*/
+</script>
+</body>
+</html>

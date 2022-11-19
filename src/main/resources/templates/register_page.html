@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration Page</title>
+    <link rel="stylesheet" href="css/style2.css">
+</head>
+<body>
+<div id="description"> </div>
+<div id="container">
+    <div id="container_body">
+        <div>
+            <h2> Sign Up</h2>
+            <p>It's quick and easy.</p>
+            <p class="head_para"></p>
+        </div>
+        <div id="form_name">
+            <div class="firstnameorlastname">
+                <form  method="post" th:object="${registerRequest}" name="form" action="/register"  >
+                    <div id="errorBox"></div>
+                    <input type="text" placeholder="First name" name="firstName" class="input_name">
+                    <input type="text" placeholder="Surname" name="surname" class="input_name">
+
+            </div>
+            <div id="email_form">
+                <input type="email" placeholder="email address" class="input_email" name="email" required>
+            </div>
+            <div id="password_form">
+                <input type="password" placeholder="New password" name="password" class="input_password" required>
+            </div>
+            <span> Date of birth</span>
+            <input type="date" class="input_password" name="dob" required>
+            <div id="radio_button">
+                <label for="female">Female:
+                    <input type="radio" name ="gender" value="female"  id="female" required>
+                </label>
+                <label for="male"> Male:
+                    <input type="radio" name ="gender" value="male" id="male">
+                </label>
+                <label for="custom"> Custom:
+                    <input type="radio" name ="gender" value="custom"  id="custom">
+                </label>
+            </div>
+        </div>
+    </div>
+    <button name="btnSubmit">Sign Up</button>
+</div>
+</form>
+</body>
+</html>

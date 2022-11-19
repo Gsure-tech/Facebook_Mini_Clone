@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+    <!-- <link rel="stylesheet" href="../static/css/style.css">-->
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<h1>facebook</h1>
+<form th:action="@{/login}" method="post" th:object = "${loginRequest}">
+
+    <div class="form-group">
+        <input type="text"  placeholder="Email address or phone number" name="email" required>
+    </div>
+    <div class="form-group">
+        <input type="password" placeholder="Password" name="password" required>
+    </div>
+    <div> <span class="text-danger" style="color:red" th:text="${session.errorMessage}"> </span></div>
+    <div class="form-group">
+        <input type="submit" value="Login  ">
+    </div>
+
+    <span>Forgotten password?</span>
+    <button> <a href="/register">Create New Account</a></button>
+    <!--<a href="signup"> hello</a>-->
+</form>
+</body>
+</html>
